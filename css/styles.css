@@ -1,0 +1,8 @@
+.results-cards .thumbnail {
+	min-height: 237px;
+}
+.results-cards .thumbnail .image {
+	max-height: 150px; 
+	min-height: 150px; 
+	overflow: hidden;
+}

@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-12">
+    <form name="searchForm" novalidate>
+      <div class="form-group">
+        <input ng-model="query" placeholder="Search Artists" ng-pattern="/^[a-zA-Z0-9' 'Ññ]*$/" class="form-control"/>
+      </div>
+      <div class="clearfix">
+        <div class="alert alert-danger" ng-show="searchForm.$invalid">Use alphanumeric characters only please</div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-sm-6 col-md-4 results-cards" ng-repeat="item in results">
+    <div class="thumbnail" ng-click="artistLink(item.name)">
+      <div class="image text-center" >
+        <img ng-src="{{item.image[3]['#text']}}" alt="{{item.name}}" ng-if="item.image[3]['#text']">
+        <img src="http://userserve-ak.last.fm/serve/252/88142801.png" alt="{{item.name}}" ng-if="!item.image[3]['#text']">
+      </div>
+      <div class="caption text-center">
+        <h4>{{item.name}}</h4>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="alert alert-info" ng-show="!results && query">
+  No results for this search criteria
+</div>

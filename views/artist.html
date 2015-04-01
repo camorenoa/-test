@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-sm-4">
+    <a ui-sref="home" class="btn btn-link">< New Search</a>
+    <img ng-src="{{imageSrc}}" alt="{{artistData.name}}" class="img-responsive">
+  </div>
+  <div class="col-sm-8">
+    <h1>{{artistData.name}}</h1>
+    <p ng-bind-html="artistData.bio.content"></p>
+  </div>
+</div>
+<hr />
+<div class="well">
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>Similar Artist</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 col-md-2 results-cards" ng-repeat="similar in artistData.similar.artist">   
+        <div class="thumbnail" ng-click="artistLink(similar.name)">
+          <div class="image text-center" >
+            <img ng-src="{{similar.image[3]['#text']}}" alt="{{similar.name}}" ng-if="similar.image[3]['#text']">
+            <img src="http://userserve-ak.last.fm/serve/252/88142801.png" alt="{{similar.name}}" ng-if="!similar.image[3]['#text']">
+          </div>
+          <div class="caption text-center">
+            <h4>{{similar.name}}</h4>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
