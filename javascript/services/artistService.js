@@ -14,25 +14,23 @@
 
   function artistService($http, $stateParams) {
 
-    var artistName = $stateParams.id;
-    artistName = artistName.replace(/\+/gi, " ");
-
     var service = {
     	artistData: artistData
     }
     
     return service;
 
-    function artistData () {
+    /*
+     * Get artist data from api
+     */
+    function artistData (artistName) {
     	return $http({
     		method: 'GET',
     		url: configUrl.apiUrl,
         params: {
           method: 'artist.getInfo',
           api_key: configUrl.apiKey,
-          // mbid: artistId,
           artist: artistName,
-          autocorrect: [0|1],
           format: 'json'
         }
     	});

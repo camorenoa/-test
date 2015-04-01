@@ -13,8 +13,13 @@
 
   function artistController($scope, $state, $stateParams, artistService) {
 
+    var artistName = $stateParams.id;
+    artistName = artistName.replace(/\+/gi, " ");
 
-    artistService.artistData()
+    /*
+     * Send artist name
+     */
+    artistService.artistData(artistName)
       .success(function (response) {
         $scope.artistData = response.artist;
         var image = $scope.artistData.image;
@@ -24,11 +29,13 @@
         console.error(error);
       });
 
+    /*
+     * Similar Artist link
+     */
     $scope.artistLink = function(nameArtist) {
       var nameUrl = nameArtist.replace(/\ /gi, "+");
       if($stateParams.id != nameUrl) {
         window.location.href = $state.href($state.current.name, {id: nameUrl});
-        window.location.reload();
       }
     }
   }

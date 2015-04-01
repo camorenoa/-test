@@ -13,15 +13,17 @@
 
   function searchController(searchService, $scope, $state) {
     $scope.results = {};
-    $scope.TEXT_REGEXP = "/^[a-zA-Z0-9' 'Ññ]*$/";
+    $scope.TEXT_REGEXP = /^[a-zA-Z0-9'\s'Ññ]*$/i;
 
+    /*
+     * Watch query changes in search bar
+     */
     $scope.$watch('query', function(newValue, oldValue){
       if(newValue != oldValue){
         searchService.doSearch(newValue)
           .then(function (response) {
-            if($scope.query && $scope.query != $scope.TEXT_REGEXP) {
+            if($scope.query && $scope.TEXT_REGEXP.test($scope.query)) {
               $scope.results = response.data.results.artistmatches.artist;
-              // console.log('response', $scope.results );
             } else if(!$scope.query) {
               $scope.results = {};
             }
@@ -31,8 +33,11 @@
       }
     });
 
+    /*
+     * Artist redirect
+     */
     $scope.artistLink = function(nameArtist) {
-      var nameUrl = nameArtist.replace(/\ /gi, "+");
+      var nameUrl = nameArtist.replace(/\s/gi, "+");
       $state.go('artist', {id: nameUrl});
     }
 

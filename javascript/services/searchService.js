@@ -20,6 +20,9 @@
     
     return service;
     
+    /*
+     * Get artist search data from api
+     */
     function doSearch (query) {
       return $http({
         method: 'GET',
